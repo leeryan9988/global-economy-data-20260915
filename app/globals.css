@@ -33,5 +33,7 @@
     @apply bg-background text-foreground antialiased;
     font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
   }
+  html { scroll-behavior: smooth; }
+  ::selection { background: #a7f3d0; color: #062a26; }
   :focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
 }

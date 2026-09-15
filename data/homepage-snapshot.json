@@ -1,0 +1,377 @@
+{
+  "generatedAt": "2026-09-15T17:52:56.621Z",
+  "source": "World Bank",
+  "sourceUpdatedAt": "2026-07-13",
+  "countryOverviews": [
+    {
+      "countryCode": "CN",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "19498039388042.6",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "13861.970224368",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "1406585000",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "0.0595646916565403",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "4.615",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": "4.35",
+          "year": 2024,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "countryCode": "US",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "30769700000000",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "90026.5163005744",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "341784857",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "2.94952520485207",
+          "year": 2024,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "4.198",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": "3.25",
+          "year": 2021,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "countryCode": "JP",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "4435162999976.94",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "35951.0449549304",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "123366734",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "3.17253034260248",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "2.451",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": "0.994",
+          "year": 2017,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "countryCode": "DE",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "5050922925047.05",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "60496.4350820414",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "83491249",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "2.17178770949721",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "3.711",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": null,
+          "year": null,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "countryCode": "IN",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "3956067115771.63",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "2702.47987141553",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "1463865525",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "2.39884954182294",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "4.219",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": "8.56714285714286",
+          "year": 2022,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "countryCode": "GB",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "4002587541846.01",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "57601.9621201954",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "69487000",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "3.88306881626",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "4.746",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": "0.5",
+          "year": 2014,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "countryCode": "FR",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "3366315927447.33",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "48985.7307807924",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "68720337",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "0.943770212469976",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "7.542",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": null,
+          "year": null,
+          "unit": "percent"
+        }
+      ]
+    },
+    {
+      "countryCode": "KR",
+      "indicators": [
+        {
+          "indicatorId": "gdp",
+          "value": "1872374961553.15",
+          "year": 2025,
+          "unit": "USD"
+        },
+        {
+          "indicatorId": "gdp-per-capita",
+          "value": "36226.9663637512",
+          "year": 2025,
+          "unit": "USD/person"
+        },
+        {
+          "indicatorId": "population",
+          "value": "51684564",
+          "year": 2025,
+          "unit": "people"
+        },
+        {
+          "indicatorId": "inflation",
+          "value": "2.12309421458659",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "unemployment",
+          "value": "2.683",
+          "year": 2025,
+          "unit": "percent"
+        },
+        {
+          "indicatorId": "lending-rate",
+          "value": "4.1925",
+          "year": 2025,
+          "unit": "percent"
+        }
+      ]
+    }
+  ],
+  "gdpRanking": [
+    {
+      "countryCode": "US",
+      "value": "30769700000000",
+      "year": 2025
+    },
+    {
+      "countryCode": "CN",
+      "value": "19498039388042.6",
+      "year": 2025
+    },
+    {
+      "countryCode": "DE",
+      "value": "5050922925047.05",
+      "year": 2025
+    },
+    {
+      "countryCode": "JP",
+      "value": "4435162999976.94",
+      "year": 2025
+    },
+    {
+      "countryCode": "GB",
+      "value": "4002587541846.01",
+      "year": 2025
+    },
+    {
+      "countryCode": "IN",
+      "value": "3956067115771.63",
+      "year": 2025
+    },
+    {
+      "countryCode": "FR",
+      "value": "3366315927447.33",
+      "year": 2025
+    },
+    {
+      "countryCode": "KR",
+      "value": "1872374961553.15",
+      "year": 2025
+    }
+  ]
+}

@@ -1,30 +1,86 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowDown, Database, Globe2, ShieldCheck } from "lucide-react";
+import { CountryCard } from "@/components/homepage/country-card";
+import { GdpRanking } from "@/components/homepage/gdp-ranking";
+import { SiteHeader } from "@/components/homepage/site-header";
 import { countries } from "@/lib/catalog/countries";
-import { indicators } from "@/lib/catalog/indicators";
+import { formatBeijingDate } from "@/lib/homepage/format";
+import { homepageSnapshot } from "@/lib/homepage/snapshot";
 
 export default function Home() {
+  const rankingYear = homepageSnapshot.gdpRanking[0]?.year;
   return (
-    <main className="mx-auto flex min-h-screen max-w-5xl flex-col px-5 py-10 sm:px-10 sm:py-16">
-      <header className="mb-12 border-b pb-8">
-        <p className="mb-5 text-xs font-semibold tracking-[0.2em] text-primary">GLOBAL ECONOMY DATA</p>
-        <h1 className="max-w-2xl text-3xl font-semibold leading-snug tracking-tight sm:text-5xl">全球经济数据<br className="hidden sm:block" />对比网站</h1>
-        <p className="mt-5 max-w-xl leading-7 text-muted-foreground">从数据出发，了解世界。查看主要经济体的年度数据、长期趋势与指标来源。</p>
-      </header>
-      <section aria-labelledby="stage-heading" className="mb-8 rounded-xl border border-primary/20 bg-primary/5 p-5">
-        <h2 id="stage-heading" className="font-semibold text-primary">网站筹备中</h2>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">当前为基础结构预览。经济数据尚未接入，数据查询与比较功能将分阶段开放。</p>
+    <main id="top" className="min-h-screen bg-[#f4f6f3] text-slate-950">
+      <section className="relative overflow-hidden bg-[#092e2a]">
+        <div aria-hidden="true" className="absolute inset-0 opacity-60 [background-image:radial-gradient(circle_at_18%_20%,rgba(52,211,153,0.2),transparent_28%),radial-gradient(circle_at_82%_0%,rgba(45,212,191,0.16),transparent_30%)]" />
+        <div aria-hidden="true" className="absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.6)_1px,transparent_1px)] [background-size:64px_64px]" />
+        <div className="relative">
+          <SiteHeader />
+          <div className="mx-auto grid max-w-7xl gap-12 px-5 pb-20 pt-14 sm:px-8 sm:pb-24 sm:pt-20 lg:grid-cols-[1.2fr_0.8fr] lg:px-10 lg:pb-28">
+            <div>
+              <p className="mb-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-emerald-300"><Globe2 className="size-4" aria-hidden="true" /> Global Economy Data</p>
+              <h1 className="max-w-3xl text-4xl font-semibold leading-[1.12] tracking-[-0.035em] text-white sm:text-6xl lg:text-7xl">用清楚的数据，<br />理解世界经济。</h1>
+              <p className="mt-7 max-w-2xl text-base leading-8 text-emerald-50/70 sm:text-lg">查看中国、美国、日本、德国、印度、英国、法国和韩国的核心经济指标。每个数字都标明实际年份，缺失数据不会被其他年份替代。</p>
+              <a href="#overview" className="mt-9 inline-flex items-center gap-2 rounded-full bg-emerald-300 px-5 py-3 text-sm font-semibold text-emerald-950 transition hover:bg-emerald-200">浏览经济概览 <ArrowDown className="size-4" aria-hidden="true" /></a>
+            </div>
+            <aside className="self-end rounded-3xl border border-white/10 bg-white/[0.07] p-6 text-white backdrop-blur-sm sm:p-7">
+              <p className="text-xs uppercase tracking-[0.18em] text-emerald-200/70">当前数据范围</p>
+              <div className="mt-5 grid grid-cols-3 gap-4">
+                <div><strong className="block text-3xl font-semibold">8</strong><span className="mt-1 block text-xs text-emerald-50/55">个经济体</span></div>
+                <div><strong className="block text-3xl font-semibold">6</strong><span className="mt-1 block text-xs text-emerald-50/55">项指标</span></div>
+                <div><strong className="block text-3xl font-semibold">66</strong><span className="mt-1 block text-xs text-emerald-50/55">个年度位置</span></div>
+              </div>
+              <div className="mt-7 border-t border-white/10 pt-5 text-xs leading-6 text-emerald-50/65">
+                <p className="flex items-center gap-2"><Database className="size-4 text-emerald-300" aria-hidden="true" />来源：World Bank</p>
+                <p className="mt-2">来源数据更新：{homepageSnapshot.sourceUpdatedAt ?? "未提供"}</p>
+                <p>页面快照：{formatBeijingDate(homepageSnapshot.generatedAt)}</p>
+              </div>
+            </aside>
+          </div>
+        </div>
       </section>
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader><CardTitle>8 个经济体</CardTitle><CardDescription>第一版覆盖范围</CardDescription></CardHeader>
-          <CardContent><ul className="grid grid-cols-2 gap-x-4 gap-y-5">{countries.map((country) => <li key={country.iso2} className="flex items-center gap-3"><span className="rounded bg-muted px-2 py-1 font-mono text-xs text-muted-foreground">{country.iso2}</span><span>{country.name_zh}</span></li>)}</ul></CardContent>
-        </Card>
-        <Card>
-          <CardHeader><CardTitle>6 项核心指标</CardTitle><CardDescription>年度数据 · 优先采用 World Bank</CardDescription></CardHeader>
-          <CardContent><ul className="grid grid-cols-2 gap-x-4 gap-y-5">{indicators.map((indicator) => <li key={indicator.id}>{indicator.name_zh}</li>)}</ul><p className="mt-6 text-xs leading-5 text-muted-foreground">GDP 使用现价美元。贷款利率与央行政策利率不同，数据接入后将提供完整口径说明。</p></CardContent>
-        </Card>
-      </div>
-      <footer className="mt-auto pt-12 text-xs leading-6 text-muted-foreground">全球经济数据对比网站 · 基础预览<br />此页面未展示任何经济观测数值。</footer>
+
+      <section id="overview" aria-labelledby="overview-title" className="mx-auto max-w-7xl scroll-mt-8 px-5 py-16 sm:px-8 sm:py-24 lg:px-10">
+        <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+          <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">Economic overview</p><h2 id="overview-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">八个经济体，一眼看清</h2></div>
+          <p className="max-w-xl text-sm leading-7 text-slate-500">每项指标采用该国家最近一个非空年份，因此同一卡片内的年份可能不同。贷款利率不是央行政策利率。</p>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {countries.map((country) => {
+            const overview = homepageSnapshot.countryOverviews.find((item) => item.countryCode === country.iso2);
+            return overview ? <CountryCard key={country.iso2} country={country} overview={overview} /> : null;
+          })}
+        </div>
+      </section>
+
+      <section id="ranking" aria-labelledby="ranking-title" className="scroll-mt-8 border-y border-slate-200 bg-white">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[0.72fr_1.28fr] lg:px-10">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-800">GDP ranking</p>
+            <h2 id="ranking-title" className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">{rankingYear} 年 GDP 排名</h2>
+            <p className="mt-5 max-w-md text-sm leading-7 text-slate-500">使用同一年、现价美元口径进行比较。八个国家在该年份均有有效数据，空值不参与排名。</p>
+            <div className="mt-8 rounded-2xl bg-[#edf7f2] p-5 text-sm leading-7 text-emerald-950">排名反映经济总量，不直接代表居民收入或生活质量。人均 GDP 已在上方国家卡片中单独展示。</div>
+          </div>
+          <div className="rounded-3xl border border-slate-200 px-5 py-2 shadow-[0_18px_55px_-42px_rgba(15,23,42,0.35)] sm:px-7"><GdpRanking rows={homepageSnapshot.gdpRanking} /></div>
+        </div>
+      </section>
+
+      <section id="about-data" aria-labelledby="data-title" className="mx-auto max-w-7xl scroll-mt-8 px-5 py-16 sm:px-8 sm:py-24 lg:px-10">
+        <div className="rounded-[2rem] bg-slate-950 px-6 py-10 text-white sm:px-10 sm:py-12">
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+            <div><ShieldCheck className="size-8 text-emerald-300" aria-hidden="true" /><h2 id="data-title" className="mt-5 text-3xl font-semibold tracking-tight">数字之外，也说明口径</h2></div>
+            <div className="grid gap-7 text-sm leading-7 text-slate-300 sm:grid-cols-2">
+              <div><h3 className="font-semibold text-white">年份独立</h3><p className="mt-2">每个数字旁显示自己的年份。某项 2025 年缺失时，只展示它最近的有效年份。</p></div>
+              <div><h3 className="font-semibold text-white">缺失就是缺失</h3><p className="mt-2">World Bank 没有提供的数据明确标为“暂无数据”，不会填成 0，也不会借用其他指标。</p></div>
+              <div><h3 className="font-semibold text-white">统一来源</h3><p className="mt-2">第一版六项指标均优先采用 World Bank WDI 数据，保留来源更新时间。</p></div>
+              <div><h3 className="font-semibold text-white">原始精度</h3><p className="mt-2">页面会为阅读进行格式化；同步层保留原始十进制数值，不提前舍入。</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-8 text-xs leading-6 text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10"><p>全球经济数据对比网站 · 数据来源 World Bank</p><p>GDP：现价美元 · 贷款利率：非央行政策利率</p></div>
+      </footer>
     </main>
   );
 }
