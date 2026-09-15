@@ -1,0 +1,406 @@
+{
+  "generatedAt": "2026-09-15T17:27:33.601Z",
+  "source": "World Bank API v2 (source 2)",
+  "yearRange": {
+    "from": 1960,
+    "to": 2026
+  },
+  "countries": 8,
+  "indicators": 6,
+  "combinations": 48,
+  "importedRows": 3168,
+  "sourceUpdatedAtByIndicator": {
+    "gdp": "2026-07-13",
+    "gdp-per-capita": "2026-07-13",
+    "population": "2026-07-13",
+    "inflation": "2026-07-13",
+    "unemployment": "2026-07-13",
+    "lending-rate": "2026-07-13"
+  },
+  "coverage": [
+    {
+      "countryCode": "CN",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "US",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "JP",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "DE",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "IN",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "GB",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "FR",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "KR",
+      "indicatorId": "gdp",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "CN",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "US",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "JP",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "DE",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "IN",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "GB",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "FR",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "KR",
+      "indicatorId": "gdp-per-capita",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "CN",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "US",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "JP",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "DE",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "IN",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "GB",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "FR",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "KR",
+      "indicatorId": "population",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "CN",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 39,
+      "firstNonNullYear": 1987,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "US",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 65,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2024
+    },
+    {
+      "countryCode": "JP",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "DE",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "IN",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "GB",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "FR",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "KR",
+      "indicatorId": "inflation",
+      "returnedYears": 66,
+      "nonNullYears": 66,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "CN",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "US",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "JP",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "DE",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "IN",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "GB",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "FR",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "KR",
+      "indicatorId": "unemployment",
+      "returnedYears": 66,
+      "nonNullYears": 35,
+      "firstNonNullYear": 1991,
+      "latestNonNullYear": 2025
+    },
+    {
+      "countryCode": "CN",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 45,
+      "firstNonNullYear": 1980,
+      "latestNonNullYear": 2024
+    },
+    {
+      "countryCode": "US",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 62,
+      "firstNonNullYear": 1960,
+      "latestNonNullYear": 2021
+    },
+    {
+      "countryCode": "JP",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 25,
+      "firstNonNullYear": 1993,
+      "latestNonNullYear": 2017
+    },
+    {
+      "countryCode": "DE",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 0,
+      "firstNonNullYear": null,
+      "latestNonNullYear": null
+    },
+    {
+      "countryCode": "IN",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 45,
+      "firstNonNullYear": 1978,
+      "latestNonNullYear": 2022
+    },
+    {
+      "countryCode": "GB",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 48,
+      "firstNonNullYear": 1967,
+      "latestNonNullYear": 2014
+    },
+    {
+      "countryCode": "FR",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 0,
+      "firstNonNullYear": null,
+      "latestNonNullYear": null
+    },
+    {
+      "countryCode": "KR",
+      "indicatorId": "lending-rate",
+      "returnedYears": 66,
+      "nonNullYears": 30,
+      "firstNonNullYear": 1996,
+      "latestNonNullYear": 2025
+    }
+  ]
+}
