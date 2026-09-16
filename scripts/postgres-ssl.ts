@@ -12,14 +12,12 @@ export function createSupabasePoolConfig(connectionString: string): PoolConfig {
     throw new Error("DATABASE_URL must use the postgres or postgresql protocol.");
   }
 
-  // node-postgres lets SSL query parameters replace the explicit SSL object.
-  // Remove those parameters so the trusted Supabase CA remains authoritative.
-  for (const parameter of ["sslmode", "sslrootcert", "sslcert", "sslkey"]) {
-    databaseUrl.searchParams.delete(parameter);
-  }
-
   return {
-    connectionString: databaseUrl.toString(),
+    user: decodeURIComponent(databaseUrl.username),
+    password: decodeURIComponent(databaseUrl.password),
+    host: databaseUrl.hostname,
+    port: databaseUrl.port ? Number(databaseUrl.port) : 5432,
+    database: decodeURIComponent(databaseUrl.pathname.slice(1)) || "postgres",
     ssl: {
       ca: supabaseRootCertificate,
       rejectUnauthorized: true,
