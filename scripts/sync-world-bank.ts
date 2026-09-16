@@ -51,6 +51,7 @@ if (!connectionString) throw new Error("DATABASE_URL is required and must point 
 const fromYear = Number(process.env.SYNC_FROM_YEAR ?? "1960");
 const toYear = Number(process.env.SYNC_TO_YEAR ?? new Date().getUTCFullYear());
 const databaseConfig = createSupabasePoolConfig(connectionString);
+const databaseUrl = new URL(String(databaseConfig.connectionString));
 const pool = new Pool({
   ...databaseConfig,
   max: 3,
@@ -62,7 +63,7 @@ try {
   if (result.status !== "success") process.exitCode = 1;
 } catch (error) {
   if (error instanceof Error && "code" in error && error.code === "SELF_SIGNED_CERT_IN_CHAIN") {
-    await reportPublicCertificateChain(String(databaseConfig.host), Number(databaseConfig.port));
+    await reportPublicCertificateChain(databaseUrl.hostname, Number(databaseUrl.port || 5432));
   }
   throw error;
 } finally {

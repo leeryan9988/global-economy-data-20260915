@@ -1,6 +1,13 @@
 name: Sync World Bank data
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/sync-world-bank.ts"
+      - "scripts/postgres-ssl.ts"
+      - "certs/**"
+      - ".github/workflows/sync-world-bank.yml"
   workflow_dispatch:
   schedule:
     - cron: "17 2 1 * *"
