@@ -1,13 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import { ChevronDown, ExternalLink } from "lucide-react";
 import type { Indicator } from "@/lib/catalog/indicators";
 import { formatIndicatorValue } from "@/lib/homepage/format";
 import type { CountryIndicatorSeries } from "@/lib/series/types";
+import { IndicatorChart } from "./indicator-chart";
 
 export function IndicatorHistory({ indicator, series, initiallyOpen = false }: { indicator: Indicator; series: CountryIndicatorSeries; initiallyOpen?: boolean }) {
+  const [open, setOpen] = useState(initiallyOpen);
   const valid = series.observations.filter((item) => item.value !== null);
   const latest = valid.at(-1);
   return (
-    <details open={initiallyOpen} className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_16px_45px_-38px_rgba(15,23,42,0.35)]">
+    <details open={open} onToggle={(event) => setOpen(event.currentTarget.open)} className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_16px_45px_-38px_rgba(15,23,42,0.35)]">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-5 marker:hidden sm:px-6">
         <div>
           <h3 className="font-semibold text-slate-900">{indicator.name_zh}</h3>
@@ -15,7 +20,8 @@ export function IndicatorHistory({ indicator, series, initiallyOpen = false }: {
         </div>
         <ChevronDown className="size-5 shrink-0 text-slate-400 transition group-open:rotate-180" aria-hidden="true" />
       </summary>
-      <div className="border-t border-slate-100">
+      {open ? <div className="border-t border-slate-100">
+        <IndicatorChart indicator={indicator} series={series} />
         <div className="max-h-[32rem] overflow-auto">
           <table className="w-full min-w-[28rem] border-collapse text-sm">
             <thead className="sticky top-0 bg-slate-50 text-left text-xs text-slate-500">
@@ -39,7 +45,7 @@ export function IndicatorHistory({ indicator, series, initiallyOpen = false }: {
             World Bank <ExternalLink className="size-3.5" aria-hidden="true" />
           </a>
         </div>
-      </div>
+      </div> : null}
     </details>
   );
 }

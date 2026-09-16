@@ -62,7 +62,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
 
       <section aria-labelledby="history-title" className="border-t border-slate-200 bg-white/60">
         <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:px-10">
-          <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Historical data</p><h2 id="history-title" className="mt-3 text-3xl font-semibold tracking-tight">历史数据</h2><p className="mt-3 text-sm leading-7 text-slate-500">展开任一指标查看年度表。横向空间不足时，表格区域可以单独滚动。</p></div>
+          <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Historical data</p><h2 id="history-title" className="mt-3 text-3xl font-semibold tracking-tight">历史趋势与年度数据</h2><p className="mt-3 text-sm leading-7 text-slate-500">展开任一指标查看趋势图和年度表，可切换最近 5 年、10 年、20 年或全部年份。</p></div>
           <div className="mt-9 space-y-4">
             {indicators.map((indicator, index) => {
               const series = countrySeries.find((item) => item.indicatorId === indicator.id);
