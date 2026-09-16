@@ -11,6 +11,7 @@ export function SiteHeader() {
         <nav aria-label="主要导航" className="flex items-center gap-5 text-xs text-slate-500 sm:gap-8 sm:text-sm">
           <Link className="transition hover:text-sky-700" href="/">首页</Link>
           <Link className="transition hover:text-sky-700" href="/countries">国家</Link>
+          <Link className="transition hover:text-sky-700" href="/compare">对比</Link>
           <Link className="hidden transition hover:text-sky-700 sm:inline" href="/#ranking">GDP 排名</Link>
         </nav>
       </div>
