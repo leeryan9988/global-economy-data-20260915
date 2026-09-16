@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { Country } from "@/lib/catalog/countries";
 import { indicators } from "@/lib/catalog/indicators";
@@ -8,7 +10,7 @@ export function CountryCard({ country, overview }: { country: Country; overview:
   const gdp = overview.indicators.find((item) => item.indicatorId === "gdp");
   const details = overview.indicators.filter((item) => item.indicatorId !== "gdp");
   return (
-    <Card className="group gap-0 overflow-hidden border-slate-200 py-0 shadow-[0_18px_50px_-35px_rgba(15,23,42,0.45)] transition duration-300 hover:-translate-y-1 hover:border-emerald-700/25 hover:shadow-[0_24px_60px_-34px_rgba(15,118,110,0.35)]">
+    <Card className="group gap-0 overflow-hidden border-sky-100 py-0 shadow-[0_18px_50px_-35px_rgba(30,64,175,0.25)] transition duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_24px_60px_-34px_rgba(56,189,248,0.4)]">
       <CardHeader className="flex flex-row items-center justify-between border-b border-slate-100 bg-slate-50/70 px-5 py-4">
         <div className="flex items-center gap-3">
           <span aria-hidden="true" className="text-2xl">{country.flag}</span>
@@ -43,6 +45,9 @@ export function CountryCard({ country, overview }: { country: Country; overview:
             );
           })}
         </dl>
+        <Link href={`/country/${country.slug}`} className="mt-6 inline-flex items-center gap-2 border-t border-slate-100 pt-4 text-sm font-semibold text-sky-700 hover:text-sky-500">
+          查看历史数据 <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
       </CardContent>
     </Card>
   );
