@@ -1,9 +1,8 @@
-import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import type { PoolConfig } from "pg";
 
-const supabaseRootCertificate = readFileSync(
+const supabaseRootCertificatePath = fileURLToPath(
   new URL("../certs/supabase-prod-ca-2021.crt", import.meta.url),
-  "utf8",
 );
 
 export function createSupabasePoolConfig(connectionString: string): PoolConfig {
@@ -12,15 +11,14 @@ export function createSupabasePoolConfig(connectionString: string): PoolConfig {
     throw new Error("DATABASE_URL must use the postgres or postgresql protocol.");
   }
 
+  for (const parameter of ["sslmode", "sslrootcert", "sslcert", "sslkey", "uselibpqcompat"]) {
+    databaseUrl.searchParams.delete(parameter);
+  }
+  databaseUrl.searchParams.set("sslmode", "verify-full");
+  databaseUrl.searchParams.set("sslrootcert", supabaseRootCertificatePath);
+  databaseUrl.searchParams.set("uselibpqcompat", "true");
+
   return {
-    user: decodeURIComponent(databaseUrl.username),
-    password: decodeURIComponent(databaseUrl.password),
-    host: databaseUrl.hostname,
-    port: databaseUrl.port ? Number(databaseUrl.port) : 5432,
-    database: decodeURIComponent(databaseUrl.pathname.slice(1)) || "postgres",
-    ssl: {
-      ca: supabaseRootCertificate,
-      rejectUnauthorized: true,
-    },
+    connectionString: databaseUrl.toString(),
   };
 }
