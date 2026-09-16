@@ -14,7 +14,10 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
-    "test:db": "tsx scripts/verify-database.ts"
+    "test:db": "tsx scripts/verify-database.ts",
+    "sync:world-bank": "tsx scripts/sync-world-bank.ts",
+    "readiness": "tsx scripts/check-production-readiness.ts",
+    "readiness:production": "tsx scripts/check-production-readiness.ts --require-database"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.3.3",

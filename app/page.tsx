@@ -1,4 +1,5 @@
 import { ArrowDown, Database, Globe2, ShieldCheck } from "lucide-react";
+import Link from "next/link";
 import { CountryCard } from "@/components/homepage/country-card";
 import { GdpRanking } from "@/components/homepage/gdp-ranking";
 import { SiteHeader } from "@/components/homepage/site-header";
@@ -67,7 +68,7 @@ export default function Home() {
       <section id="about-data" aria-labelledby="data-title" className="mx-auto max-w-7xl scroll-mt-8 px-5 py-16 sm:px-8 sm:py-24 lg:px-10">
         <div className="rounded-[2rem] border border-sky-100 bg-gradient-to-br from-[#dff2ff] to-white px-6 py-10 text-slate-900 shadow-[0_24px_70px_-45px_rgba(37,99,235,0.3)] sm:px-10 sm:py-12">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-            <div><ShieldCheck className="size-8 text-sky-600" aria-hidden="true" /><h2 id="data-title" className="mt-5 text-3xl font-semibold tracking-tight">数字之外，也说明口径</h2></div>
+            <div><ShieldCheck className="size-8 text-sky-600" aria-hidden="true" /><h2 id="data-title" className="mt-5 text-3xl font-semibold tracking-tight">数字之外，也说明口径</h2><Link href="/about-data" className="mt-5 inline-flex text-sm font-semibold text-sky-700 hover:text-sky-500">查看完整数据说明 →</Link></div>
             <div className="grid gap-7 text-sm leading-7 text-slate-600 sm:grid-cols-2">
               <div><h3 className="font-semibold text-slate-950">年份独立</h3><p className="mt-2">每个数字旁显示自己的年份。某项 2025 年缺失时，只展示它最近的有效年份。</p></div>
               <div><h3 className="font-semibold text-slate-950">缺失就是缺失</h3><p className="mt-2">World Bank 没有提供的数据明确标为“暂无数据”，不会填成 0，也不会借用其他指标。</p></div>
