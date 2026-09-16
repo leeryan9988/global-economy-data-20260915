@@ -1,0 +1,46 @@
+name: Refresh World Bank snapshots
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 2 1 * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: world-bank-snapshot-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Download and rebuild World Bank snapshots
+        run: pnpm snapshot:refresh
+      - name: Verify refreshed site
+        run: |
+          pnpm test
+          pnpm build
+      - name: Commit verified snapshot changes
+        shell: bash
+        run: |
+          if git diff --quiet -- data/homepage-snapshot.json data/world-bank-series.json; then
+            echo "World Bank snapshots are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/homepage-snapshot.json data/world-bank-series.json
+          git commit -m "data: refresh World Bank snapshots"
+          git push origin HEAD:main

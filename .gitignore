@@ -3,9 +3,14 @@ node_modules/
 out/
 coverage/
 work/
+artifacts/
+.pnpm-store/
 *.tsbuildinfo
 .env*
 !.env.example
 .vercel/
 next-env.d.ts
 *.log
+
+.vercel
+.env*

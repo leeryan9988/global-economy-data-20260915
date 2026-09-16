@@ -1,33 +1,34 @@
-# 生产部署与数据同步
+# 部署与数据更新
 
-## 当前发布路径
+## 生产发布
 
-- 网站托管：Vercel。
-- 稳定网址：`https://global-economy-data-20260915.vercel.app`。
-- 源代码：`https://github.com/leeryan9988/global-economy-data-20260915`。
-- 发布触发：GitHub `main` 更新后由 Vercel 自动构建。
+- Vercel 项目：`global-economy-data-20260915`
+- 生产地址：<https://global-economy-data-20260915.vercel.app>
+- GitHub 仓库：<https://github.com/leeryan9988/global-economy-data-20260915>
+- 发布分支：`main`
 
-## Supabase/PostgreSQL 首次连接
+Vercel 与 GitHub 仓库连接后，`main` 的每次有效提交都会触发生产构建。
 
-1. 新建一个空的 Supabase 项目，不复用已有应用数据库。
-2. 按文件名顺序执行 `supabase/migrations/001_initial_schema.sql` 和 `002_seed_catalog.sql`。
-3. 使用 PostgreSQL 连接串配置 GitHub Actions 仓库密钥 `DATABASE_URL`。该值只能放在服务端密钥中，不能使用 `NEXT_PUBLIC_` 前缀。
-4. 手动运行一次 GitHub Actions 的 `Sync World Bank data`，确认 6 个指标全部成功。
-5. 检查 `data_sync_logs`、48 组覆盖矩阵和 `indicator_value_revision_proposals`。历史值变化只进入修订提案，不自动覆盖。
+## 月度数据更新
 
-## 定时同步
+工作流 `.github/workflows/refresh-world-bank-snapshots.yml` 在每月 1 日 02:17 UTC（北京时间 10:17）运行，也支持手动运行。
 
-工作流 `.github/workflows/sync-world-bank.yml` 每月 1 日 02:17 UTC（北京时间 10:17）检查一次，也支持手动运行。未配置 `DATABASE_URL` 时安全跳过并给出警告。
+工作流按以下顺序执行：
 
-同步只向空缺自然键插入新记录；已有值相同则记为 unchanged；已有值变化则新增修订提案。批准修订需要单独的证据与流程，本项目不会自动执行覆盖。
+1. 从 World Bank API 下载 8 国 × 6 指标数据。
+2. 更新 `data/world-bank-series.json` 和 `data/homepage-snapshot.json`。
+3. 执行全部测试。
+4. 执行 Next.js 生产构建。
+5. 只有验证通过且快照发生变化时，才把两份快照提交到 `main`。
+6. Vercel 自动发布新快照。
 
-## 公开页面数据
+该流程不需要数据库密码、Supabase 密钥或自签名证书。
 
-生产数据库连接完成前，公开页面继续使用仓库内经过验证的 World Bank 版本化快照。这样数据库或上游短时故障不会让网站失去现有数据。
+## Supabase/PostgreSQL
 
-数据库同步与公开快照发布是两个独立步骤。同步发现历史修订时，先审核修订提案，再生成和发布新的版本化快照，避免绕过覆盖确认规则。
+数据库 schema、迁移和一次性生产引导文件继续保留。它们可用于数据审计、复杂查询或后续服务端功能，但当前公开页面和月度更新不依赖数据库连接。
 
-## 发布检查
+## 发布前检查
 
 ```text
 pnpm lint
@@ -37,11 +38,4 @@ pnpm build
 pnpm readiness
 ```
 
-连接生产数据库后增加：
-
-```text
-pnpm readiness:production
-pnpm sync:world-bank
-```
-
-健康检查：`GET /api/health`。接口只公开数据范围和快照状态，不返回数据库地址或密钥。
+健康检查：`GET /api/health`。接口返回快照来源、更新时间、数据范围和更新模式，不公开任何密钥。

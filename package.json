@@ -14,10 +14,12 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
+    "snapshot:series": "tsx scripts/generate-series-snapshot.ts",
+    "snapshot:homepage": "tsx scripts/generate-homepage-snapshot.ts",
+    "snapshot:refresh": "pnpm snapshot:series && pnpm snapshot:homepage",
     "test:db": "tsx scripts/verify-database.ts",
     "sync:world-bank": "tsx scripts/sync-world-bank.ts",
-    "readiness": "tsx scripts/check-production-readiness.ts",
-    "readiness:production": "tsx scripts/check-production-readiness.ts --require-database"
+    "readiness": "tsx scripts/check-production-readiness.ts"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.3.3",

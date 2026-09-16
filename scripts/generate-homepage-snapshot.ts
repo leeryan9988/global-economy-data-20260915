@@ -60,6 +60,5 @@ await mkdir(outputDirectory, { recursive: true });
 await writeFile(
   path.join(outputDirectory, "homepage-snapshot.json"),
   `${JSON.stringify(snapshot, null, 2)}\n`,
-  { flag: "wx" },
 );
 console.log(`Homepage snapshot written: ${countryOverviews.length} countries, ${gdpRanking.length} GDP ranking rows.`);

@@ -14,6 +14,7 @@ export function GET() {
     countries: countries.length,
     indicators: indicators.length,
     series: worldBankSeriesSnapshot.series.length,
-    databaseConfigured: Boolean(process.env.DATABASE_URL),
+    updateMode: "repository-snapshot",
+    databaseRole: "optional-archive",
   });
 }

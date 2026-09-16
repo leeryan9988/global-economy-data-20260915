@@ -1,33 +1,71 @@
 # 全球经济数据对比网站
 
-状态：项目规范 v1 已建立；GitHub 选型待用户确认，尚未初始化应用或连接数据库。
+一个面向普通用户的全球经济数据网站，用统一口径比较 8 个主要经济体的 6 项年度指标。
 
-本目录是当前任务中的本地项目目录。已找到同名 ChatGPT 项目，但该项目没有关联本地代码路径；这些文件尚未上传到 ChatGPT 项目或 GitHub。
+- 公网地址：<https://global-economy-data-20260915.vercel.app>
+- 源代码：<https://github.com/leeryan9988/global-economy-data-20260915>
+- 数据来源：World Bank API
+- 技术栈：Next.js、TypeScript、Tailwind CSS、ECharts、Supabase/PostgreSQL、Vercel
 
-## 规范索引
+## 数据范围
 
-1. [PRD](docs/01-prd.md)
-2. [页面结构](docs/02-pages.md)
-3. [数据库结构](docs/03-database.md)
-4. [World Bank API 映射与同步规范](docs/04-api.md)
-5. [MVP 边界](docs/05-mvp-scope.md)
-6. [验收标准与阶段计划](docs/06-acceptance.md)
-7. [GitHub 选型记录](docs/07-reuse-review.md)
-8. [进度与验证记录](docs/08-progress.md)
+- 国家：中国、美国、日本、德国、印度、英国、法国、韩国。
+- 指标：GDP、人均 GDP、人口、通胀率、失业率、贷款利率。
+- 贷款利率使用 World Bank `FR.INR.LEND`，不等同于央行政策利率。
 
-## 已确定的要求
+## 页面
 
-- 8 个国家 × 6 个年度指标；贷款利率不替换成央行政策利率。
-- Next.js + TypeScript + Tailwind CSS + shadcn/ui + ECharts + Supabase/PostgreSQL + Vercel。
-- World Bank → 服务端同步 → PostgreSQL → Next.js → 页面。
-- 文档先行，按 8 个实施阶段推进；每阶段验证并记录，禁止一次性堆完功能。
-- 开发前先搜索 GitHub 并由用户确认复用方案。
-- 删除或覆盖任何已有文件、记录、配置前，说明具体对象并取得明确同意。优先新增版本化文件和迁移。
+- 首页经济概览
+- 8 个国家详情页
+- 6 个指标详情页
+- 国家对比页
+- 指标排行榜
+- 数据说明页
 
-## 依据与优先级
+## 稳定的数据更新路径
 
-本次用户明确要求 > 本次提供的 AGENTS.md 通用规则 > 原对话中已确认的方案 > 本文档补充的实施设计。
+公开页面读取仓库中的已验证 World Bank 快照。GitHub Actions 每月重新下载两份快照，执行测试和生产构建，通过后提交到 `main`；Vercel随即自动发布。
 
-原对话：百科全书，ID `6a6f3f7d-5b6c-83e8-8f10-e4152e2b255c`，已读取完整方案文本。原对话中的示例数值和 2025 年仅是示例，禁止作为真实数据导入。
+```text
+World Bank API
+  → GitHub Actions 每月刷新
+  → 测试与生产构建
+  → 提交版本化快照
+  → Vercel 自动发布
+```
 
-部署采用本次明确指定的 Vercel；仍须使用独立新仓库和独立部署项目。此为本次具体技术栈对通用 GitHub Pages 规则的覆盖，不更改其他项目的发布方式。
+Supabase/PostgreSQL schema 和一次性生产数据已保留，作为后续查询、审计或扩展能力，不再阻塞公开网站更新。
+
+## 本地运行
+
+```text
+pnpm install
+pnpm dev
+```
+
+完整验证：
+
+```text
+pnpm lint
+pnpm test
+pnpm typecheck
+pnpm build
+pnpm readiness
+```
+
+手动刷新 World Bank 快照：
+
+```text
+pnpm snapshot:refresh
+```
+
+## 项目文档
+
+- [PRD](docs/01-prd.md)
+- [页面结构](docs/02-pages.md)
+- [数据库结构](docs/03-database.md)
+- [API 映射](docs/04-api.md)
+- [MVP 边界](docs/05-mvp-scope.md)
+- [验收标准](docs/06-acceptance.md)
+- [当前状态](STATUS.md)
+- [部署与数据更新](DEPLOYMENT.md)

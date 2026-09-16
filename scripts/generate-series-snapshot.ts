@@ -42,6 +42,5 @@ await mkdir(outputDirectory, { recursive: true });
 await writeFile(
   path.join(outputDirectory, "world-bank-series.json"),
   `${JSON.stringify(snapshot, null, 2)}\n`,
-  { flag: "wx" },
 );
 console.log(`Series snapshot written: ${series.length} country-indicator combinations.`);
