@@ -14,7 +14,7 @@ import type { AlignedComparison } from "@/lib/compare/data";
 
 echarts.use([LineChart, GridComponent, LegendComponent, TooltipComponent, AriaComponent, CanvasRenderer]);
 
-export function ComparisonChart({ data, selectedCountries, indicator }: { data: AlignedComparison; selectedCountries: Country[]; indicator: Indicator }) {
+export function ComparisonChart({ data, selectedCountries, indicator, mode = "absolute" }: { data: AlignedComparison; selectedCountries: Country[]; indicator: Indicator; mode?: "absolute" | "index" }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function ComparisonChart({ data, selectedCountries, indicator }: { data: 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     chart.setOption({
       animation: !reducedMotion,
-      aria: { enabled: true, description: `${selectedCountries.map((country) => country.name_zh).join("、")}的${indicator.name_zh}年度比较图` },
+      aria: { enabled: true, description: `${selectedCountries.map((country) => country.name_zh).join("、")}的${indicator.name_zh}${mode === "index" ? "基准指数" : "年度"}比较图` },
       color: selectedCountries.map((country) => countryChartStyles[country.iso2].color),
       grid: { top: 70, right: 20, bottom: 45, left: 68 },
       legend: { top: 12, textStyle: { color: "#475569" } },
@@ -35,10 +35,10 @@ export function ComparisonChart({ data, selectedCountries, indicator }: { data: 
         textStyle: { color: "#0f172a" },
         valueFormatter: (value: string | number | null | undefined) => value === null || value === undefined
           ? "暂无数据"
-          : formatIndicatorValue({ indicatorId: indicator.id, value: String(value), year: 0, unit: indicator.unit }),
+          : mode === "index" ? `${Number(value).toFixed(1)}` : formatIndicatorValue({ indicatorId: indicator.id, value: String(value), year: 0, unit: indicator.unit }),
       },
       xAxis: { type: "category", boundaryGap: false, data: data.years.map(String), axisTick: { show: false }, axisLine: { lineStyle: { color: "#cbd5e1" } }, axisLabel: { color: "#64748b", hideOverlap: true } },
-      yAxis: { type: "value", scale: true, splitNumber: 5, axisLabel: { color: "#64748b", formatter: (value: number) => formatChartAxisValue(indicator.id, value) }, splitLine: { lineStyle: { color: "#e2e8f0", type: "dashed" } } },
+      yAxis: { type: "value", scale: true, splitNumber: 5, axisLabel: { color: "#64748b", formatter: (value: number) => mode === "index" ? value.toFixed(0) : formatChartAxisValue(indicator.id, value) }, splitLine: { lineStyle: { color: "#e2e8f0", type: "dashed" } } },
       series: data.lines.map((line) => {
         const country = selectedCountries.find((item) => item.iso2 === line.countryCode)!;
         const style = countryChartStyles[line.countryCode];
@@ -48,7 +48,7 @@ export function ComparisonChart({ data, selectedCountries, indicator }: { data: 
     const observer = new ResizeObserver(() => chart.resize());
     observer.observe(container);
     return () => { observer.disconnect(); chart.dispose(); };
-  }, [data, indicator, selectedCountries]);
+  }, [data, indicator, mode, selectedCountries]);
 
-  return <div ref={containerRef} className="h-[28rem] w-full" role="img" aria-label={`${indicator.name_zh}国家比较趋势图`} />;
+  return <div ref={containerRef} className="h-[28rem] w-full" role="img" aria-label={`${indicator.name_zh}${mode === "index" ? "基准指数" : "国家"}比较趋势图`} />;
 }

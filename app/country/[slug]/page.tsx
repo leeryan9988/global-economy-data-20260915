@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, Database } from "lucide-react";
 import { IndicatorHistory } from "@/components/country/indicator-history";
+import { CountryAnalysis } from "@/components/country/country-analysis";
 import { SiteHeader } from "@/components/homepage/site-header";
 import { countries } from "@/lib/catalog/countries";
 import { indicators } from "@/lib/catalog/indicators";
@@ -42,6 +43,8 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </section>
+
+      <CountryAnalysis country={country} countrySeries={countrySeries} allSeries={worldBankSeriesSnapshot.series} />
 
       <section aria-labelledby="latest-title" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:px-10">
         <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Latest available</p><h2 id="latest-title" className="mt-3 text-3xl font-semibold tracking-tight">最新有效数据</h2><p className="mt-3 text-sm leading-7 text-slate-500">六项指标分别使用最近的非空年份，不把旧年份伪装成同一年度。</p></div>

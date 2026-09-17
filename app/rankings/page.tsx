@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AlertCircle, Database } from "lucide-react";
 import { RankingControls } from "@/components/rankings/ranking-controls";
+import { ChangeRanking } from "@/components/rankings/change-ranking";
 import { SiteHeader } from "@/components/homepage/site-header";
 import { countries } from "@/lib/catalog/countries";
 import { indicators, type IndicatorId } from "@/lib/catalog/indicators";
@@ -9,6 +10,7 @@ import { formatIndicatorValue } from "@/lib/homepage/format";
 import { defaultRankingYear, rankAtYear } from "@/lib/rankings/data";
 import { parseRankingQuery, rankingUrl } from "@/lib/rankings/params";
 import { worldBankSeriesSnapshot } from "@/lib/series/snapshot";
+import { changeRankingAtYear } from "@/lib/analysis/economy";
 
 export const metadata: Metadata = {
   title: "八国经济指标排行榜｜全球经济数据",
@@ -26,6 +28,8 @@ export default async function RankingsPage({ searchParams }: { searchParams: Sea
   const { indicator: indicatorId, year } = parsed.value;
   const indicator = indicators.find((item) => item.id === indicatorId)!;
   const result = rankAtYear(worldBankSeriesSnapshot.series, countries, indicatorId, year);
+  const fiveYearChange = changeRankingAtYear(worldBankSeriesSnapshot.series, countries.map((country) => country.iso2), indicatorId, year, 5);
+  const tenYearChange = changeRankingAtYear(worldBankSeriesSnapshot.series, countries.map((country) => country.iso2), indicatorId, year, 10);
   const maxValue = result.rows[0]?.value ?? 0;
 
   return (
@@ -64,6 +68,11 @@ export default async function RankingsPage({ searchParams }: { searchParams: Sea
             <p className="mt-1">数值排名只表示该指标的高低，不代表综合经济质量或生活水平。</p>
           </div>
         </section>
+
+        <div className="grid gap-8 xl:grid-cols-2">
+          <ChangeRanking result={fiveYearChange} indicator={indicator} />
+          <ChangeRanking result={tenYearChange} indicator={indicator} />
+        </div>
       </div>
     </main>
   );

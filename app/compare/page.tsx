@@ -3,10 +3,11 @@ import Link from "next/link";
 import { AlertCircle, Database } from "lucide-react";
 import { CompareControls } from "@/components/compare/compare-controls";
 import { ComparisonChart } from "@/components/compare/comparison-chart";
+import { ComparisonSummary } from "@/components/compare/comparison-summary";
 import { SiteHeader } from "@/components/homepage/site-header";
 import { countries } from "@/lib/catalog/countries";
 import { indicators } from "@/lib/catalog/indicators";
-import { alignComparisonSeries } from "@/lib/compare/data";
+import { alignComparisonSeries, normalizeComparisonSeries } from "@/lib/compare/data";
 import { compareUrl, parseCompareQuery } from "@/lib/compare/params";
 import { formatIndicatorValue } from "@/lib/homepage/format";
 import { worldBankSeriesSnapshot } from "@/lib/series/snapshot";
@@ -25,6 +26,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
   const indicator = indicators.find((item) => item.id === selection.indicator)!;
   const selectedCountries = selection.countries.map((code) => countries.find((country) => country.iso2 === code)!);
   const data = alignComparisonSeries(worldBankSeriesSnapshot.series, selection.countries, selection.indicator, selection.from, selection.to);
+  const indexedData = normalizeComparisonSeries(data);
   const defaultUrl = compareUrl({ countries: ["CN", "US"], indicator: "gdp", from: 2000, to: latestAvailableYear });
 
   return (
@@ -48,12 +50,22 @@ export default async function ComparePage({ searchParams }: { searchParams: Sear
 
         <CompareControls selection={selection} minYear={worldBankSeriesSnapshot.requestedFromYear} maxYear={latestAvailableYear} />
 
+        <ComparisonSummary data={data} selectedCountries={[...selectedCountries]} indicator={indicator} />
+
         <section aria-labelledby="compare-chart-title" className="overflow-hidden rounded-3xl border border-sky-100 bg-white shadow-[0_20px_70px_-55px_rgba(2,132,199,0.65)]">
           <div className="flex flex-col gap-3 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-7">
             <div><h2 id="compare-chart-title" className="text-xl font-semibold">{indicator.name_zh}趋势比较</h2><p className="mt-1 text-xs text-slate-500">{selection.from}–{selection.to} · {indicator.name_en}</p></div>
             <p className="flex items-center gap-2 text-xs text-slate-500"><Database className="size-4 text-sky-600" aria-hidden="true" />World Bank · 更新 {worldBankSeriesSnapshot.sourceUpdatedAt ?? "未提供"}</p>
           </div>
           <div className="px-2 py-4 sm:px-5"><ComparisonChart data={data} selectedCountries={[...selectedCountries]} indicator={indicator} /></div>
+        </section>
+
+        <section aria-labelledby="compare-index-title" className="overflow-hidden rounded-3xl border border-sky-100 bg-white shadow-[0_20px_70px_-55px_rgba(2,132,199,0.65)]">
+          <div className="border-b border-slate-100 px-5 py-5 sm:px-7">
+            <h2 id="compare-index-title" className="text-xl font-semibold">相同起点增长比较</h2>
+            <p className="mt-1 text-xs leading-5 text-slate-500">将 {selection.from} 年设为100，比较之后的相对变化。起始年缺失或等于零的国家不生成指数线。</p>
+          </div>
+          <div className="px-2 py-4 sm:px-5"><ComparisonChart data={indexedData} selectedCountries={[...selectedCountries]} indicator={indicator} mode="index" /></div>
         </section>
 
         <section aria-labelledby="compare-table-title" className="overflow-hidden rounded-3xl border border-sky-100 bg-white">

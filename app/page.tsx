@@ -1,6 +1,7 @@
 import { ArrowDown, Database, Globe2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { CountryCard } from "@/components/homepage/country-card";
+import { EconomicSignals } from "@/components/homepage/economic-signals";
 import { GdpRanking } from "@/components/homepage/gdp-ranking";
 import { SiteHeader } from "@/components/homepage/site-header";
 import { countries } from "@/lib/catalog/countries";
@@ -52,6 +53,8 @@ export default function Home() {
           })}
         </div>
       </section>
+
+      <EconomicSignals />
 
       <section id="ranking" aria-labelledby="ranking-title" className="scroll-mt-8 border-y border-slate-200 bg-white">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-[0.72fr_1.28fr] lg:px-10">

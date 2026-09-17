@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CalendarDays, Database, ExternalLink } from "lucide-react";
 import { ComparisonChart } from "@/components/compare/comparison-chart";
+import { ChangeRanking } from "@/components/rankings/change-ranking";
 import { SiteHeader } from "@/components/homepage/site-header";
 import { countries } from "@/lib/catalog/countries";
 import { indicators, isIndicatorId, worldBankSource } from "@/lib/catalog/indicators";
@@ -12,6 +13,7 @@ import { formatIndicatorValue } from "@/lib/homepage/format";
 import { defaultRankingYear, rankAtYear } from "@/lib/rankings/data";
 import { rankingUrl } from "@/lib/rankings/params";
 import { getIndicatorSeries, latestNonNull, worldBankSeriesSnapshot } from "@/lib/series/snapshot";
+import { changeRankingAtYear } from "@/lib/analysis/economy";
 
 export const dynamicParams = false;
 
@@ -42,6 +44,8 @@ export default async function IndicatorPage({ params }: { params: Promise<{ id: 
   const trend = alignComparisonSeries(worldBankSeriesSnapshot.series, [...countryCodes], id, fromYear, latestYear);
   const rankingDefault = defaultRankingYear(worldBankSeriesSnapshot.series, countryCodes, id);
   const ranking = rankAtYear(worldBankSeriesSnapshot.series, countries, id, rankingDefault.year);
+  const fiveYearChange = changeRankingAtYear(worldBankSeriesSnapshot.series, countryCodes, id, rankingDefault.year, 5);
+  const tenYearChange = changeRankingAtYear(worldBankSeriesSnapshot.series, countryCodes, id, rankingDefault.year, 10);
   const compareHref = compareUrl({ countries: ["CN", "US"], indicator: id, from: fromYear, to: latestYear });
   const sourceHref = `${worldBankSource.indicatorBaseUrl}${indicator.api_code}`;
 
@@ -100,6 +104,14 @@ export default async function IndicatorPage({ params }: { params: Promise<{ id: 
           <div className="mt-8 overflow-hidden rounded-3xl border border-sky-100 bg-white px-2 py-4 shadow-[0_20px_70px_-55px_rgba(2,132,199,0.65)] sm:px-5">
             <ComparisonChart data={trend} selectedCountries={[...countries]} indicator={indicator} />
           </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="change-title" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20 lg:px-10">
+        <div><p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Change ranking</p><h2 id="change-title" className="mt-3 text-3xl font-semibold tracking-tight">谁变化得更快</h2><p className="mt-3 text-sm leading-7 text-slate-500">使用完全相同的起止年份计算；百分率指标按百分点变化，缺失国家不借用其他年份。</p></div>
+        <div className="mt-8 grid gap-8 xl:grid-cols-2">
+          <ChangeRanking result={fiveYearChange} indicator={indicator} />
+          <ChangeRanking result={tenYearChange} indicator={indicator} />
         </div>
       </section>
 

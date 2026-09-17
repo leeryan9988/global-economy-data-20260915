@@ -33,3 +33,28 @@ export function alignComparisonSeries(
   });
   return { years, lines };
 }
+
+export function normalizeComparisonSeries(data: AlignedComparison): AlignedComparison {
+  return {
+    years: data.years,
+    lines: data.lines.map((line) => {
+      const baseline = line.values[0];
+      return {
+        countryCode: line.countryCode,
+        values: baseline === null || baseline === 0
+          ? line.values.map(() => null)
+          : line.values.map((value) => value === null ? null : Number((value / baseline * 100).toFixed(12))),
+      };
+    }),
+  };
+}
+
+export function latestSharedComparison(data: AlignedComparison) {
+  for (let index = data.years.length - 1; index >= 0; index -= 1) {
+    const values = data.lines.map((line) => line.values[index]);
+    if (values.every((value): value is number => value !== null)) {
+      return { year: data.years[index], values };
+    }
+  }
+  return null;
+}
